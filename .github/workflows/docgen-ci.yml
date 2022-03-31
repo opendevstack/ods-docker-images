@@ -1,16 +1,24 @@
-name: CI
+name: DocGen Build Base Image
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
+on: [ push, pull_request ]
 
 jobs:
-  build:
+  changes:
+    # Set job outputs to values from filter step
+    outputs:
+      buildImage: ${{ steps.filter.outputs.imageChanged }}
+    steps:
+    - 
+      uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          imageChanged:
+            - 'doc-gen/**'
+          
+  buildImage:
+    needs: changes
+      if: ${{ needs.changes.outputs.imageChanged == 'true' }}
     runs-on: ubuntu-latest
     steps:
       -
@@ -33,7 +41,7 @@ jobs:
         name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: .
+          context: doc-gen
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}          
