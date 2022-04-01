@@ -14,7 +14,7 @@ jobs:
       with:
         filters: |
           imageChanged:
-            - 'doc-gen/**'
+            - 'docgen/**'
           
   buildImage:
     needs: changes
