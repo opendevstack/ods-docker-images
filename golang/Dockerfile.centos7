@@ -18,10 +18,8 @@ ENV GOBIN /usr/local/bin
 
 COPY install-golangci-lint.sh /tmp/install-golangci-lint.sh
 RUN /tmp/install-golangci-lint.sh -b /usr/local/bin v1.25.0 && \
-    rm -f /tmp/install-golangci-lint.sh
-
-RUN go get -u github.com/jstemmer/go-junit-report
-
-RUN mkdir -p /home/jenkins/go && chmod g+w /home/jenkins/go
+    rm -f /tmp/install-golangci-lint.sh && \
+    go get -u github.com/jstemmer/go-junit-report && \
+    mkdir -p /home/jenkins/go && chmod g+w /home/jenkins/go
 
 WORKDIR /go
