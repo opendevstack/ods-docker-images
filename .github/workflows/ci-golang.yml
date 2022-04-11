@@ -44,7 +44,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{env.MODULE_NAME}}
-          file: Dockerfile.ubi8
+          file: ${{env.MODULE_NAME}}/Dockerfile.ubi8
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
@@ -56,7 +56,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{env.MODULE_NAME}}
-          file: Dockerfile.centos7
+          file: ${{env.MODULE_NAME}}/Dockerfile.centos7
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
