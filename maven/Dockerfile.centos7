@@ -22,6 +22,10 @@ ENV HOME=/home/jenkins \
 
 # Container support is now integrated in Java 11, the +UseCGroupMemoryLimitForHeap option has been pruned
 ENV JAVA_TOOL_OPTIONS="-XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true"
+ENV MAVEN_VERSION=3.5.4
+ENV BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
+ENV MAVEN_HOME=/usr/share/maven
+ENV MAVEN_CONFIG=$HOME/.m2
 
 # Copy use java scripts.
 COPY use-j*.sh /home/jenkins/
@@ -37,8 +41,6 @@ COPY use-j*.sh /home/jenkins/
     echo $JAVA_HOME
 
 # Install Maven
-ENV MAVEN_VERSION=3.5.4
-ENV BASE_URL=https://apache.osuosl.org/maven/maven-3/${MAVEN_VERSION}/binaries
 RUN mkdir -p /usr/share/maven /usr/share/maven/ref && \
     curl -fsSL -o /tmp/apache-maven.tar.gz ${BASE_URL}/apache-maven-${MAVEN_VERSION}-bin.tar.gz && \
     tar -xzf /tmp/apache-maven.tar.gz -C /usr/share/maven --strip-components=1 && \
@@ -46,8 +48,6 @@ RUN mkdir -p /usr/share/maven /usr/share/maven/ref && \
     ln -s /usr/share/maven/bin/mvn /usr/bin/mvn && \
     mkdir -p $HOME/.m2 && \
     mvn --version
-ENV MAVEN_HOME=/usr/share/maven
-ENV MAVEN_CONFIG=$HOME/.m2
 
 # set java proxy var
 COPY set_maven_proxy.sh /tmp/set_maven_proxy.sh
