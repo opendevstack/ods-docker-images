@@ -26,7 +26,6 @@ ENV AGE_VERSION=1.0.0
 ENV GEM_HOME /opt/bundle
 ENV RBENV_ROOT /opt/rbenv
 ENV RBENV_SHELL bash
-
 ENV INSTALL_PKGS="yum-utils gcc make git-core zlib zlib-devel gcc-c++ patch readline readline-devel \
     libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel xz"
 ENV PATH=/opt/tfenv/bin:/opt/rbenv/shims:/opt/rbenv/bin:/opt/node/bin:$PATH

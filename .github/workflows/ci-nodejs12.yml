@@ -1,0 +1,25 @@
+name: Build Base Image for 'nodejs12'
+
+on:
+  pull_request:
+    paths:
+      - "nodejs12/**"
+  push:
+    branches:
+      - 'main'
+    paths:
+      - "nodejs12/**"
+
+jobs:
+  nodejs12_module:
+    uses: ./.github/workflows/publish-two-docker.yml
+    secrets:
+      dockeHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerHubToken: ${{ secrets.DOCKERHUB_TOKEN }}
+    with:
+      module: 'nodejs12'
+      imageName: 's2obcn/nodejs12-test'
+      buildArgs: |
+        nexusUrl=https://nexus.example.com
+        nexusAuth=developer:s3cr3t
+    

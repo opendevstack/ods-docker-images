@@ -1,0 +1,23 @@
+name: Build Base Image for 'terraform'
+
+on:
+  pull_request:
+    paths:
+      - "terraform/**"
+  push:
+    branches:
+      - 'main'
+    paths:
+      - "terraform/**"
+
+jobs:
+  terraform_module:
+    uses: ./.github/workflows/publish-two-docker.yml
+    secrets:
+      dockeHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerHubToken: ${{ secrets.DOCKERHUB_TOKEN }}
+    with:
+      module: 'terraform'
+      imageName: 's2obcn/terraform-test'
+      buildArgs: ""
+    
