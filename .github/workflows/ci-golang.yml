@@ -3,6 +3,8 @@ name: Build Base Image for 'golang'
 env:
   IMAGE_NAME: s2obcn/golang-test
   MODULE_NAME: 'golang'
+  BUILD_ARGS: |
+    goDistributionUrl=https://golang.org/dl/go1.14.2.linux-amd64.tar.gz
 
 on:
   pull_request:
@@ -32,8 +34,7 @@ jobs:
         with:
           images: ${{env.IMAGE_NAME}}
           tags: |
-            type=ref,event=branch
-            type=sha
+            type=edge,enable=true,priority=700,prefix=,suffix=,branch=$repo.default_branch
       -
         name: Login to DockerHub
         uses: docker/login-action@v1
@@ -45,7 +46,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{env.MODULE_NAME}}
-          file: Dockerfile.ubi8
+          file: ${{env.MODULE_NAME}}/Dockerfile.ubi8
+          build-args: ${{env.BUILD_ARGS}}
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
@@ -57,7 +59,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ${{env.MODULE_NAME}}
-          file: Dockerfile.centos7
+          file: ${{env.MODULE_NAME}}/Dockerfile.centos7
+          build-args: ${{env.BUILD_ARGS}}
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
