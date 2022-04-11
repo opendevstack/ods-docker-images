@@ -1,6 +1,7 @@
 FROM adoptopenjdk/openjdk11-openj9:jdk-11.0.11_9_openj9-0.26.0-ubi
 
 COPY yum.repos.d/centos8.repo /etc/yum.repos.d/centos8.repo
+
 RUN dnf install -y libX11 libXext libXrender libjpeg xz xorg-x11-fonts-Type1 xorg-x11-fonts-75dpi git-core \
     && dnf install -y \
         https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox-0.12.6-1.centos8.x86_64.rpm \
