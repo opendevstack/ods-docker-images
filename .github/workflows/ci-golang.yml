@@ -3,6 +3,8 @@ name: Build Base Image for 'golang'
 env:
   IMAGE_NAME: s2obcn/golang-test
   MODULE_NAME: 'golang'
+  BUILD_ARGS: |
+    goDistributionUrl=https://golang.org/dl/go1.14.2.linux-amd64.tar.gz
 
 on:
   pull_request:
@@ -45,8 +47,7 @@ jobs:
         with:
           context: ${{env.MODULE_NAME}}
           file: ${{env.MODULE_NAME}}/Dockerfile.ubi8
-          build-args: |
-            goDistributionUrl: https://golang.org/dl/go1.14.2.linux-amd64.tar.gz
+          build-args: ${{env.BUILD_ARGS}}
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
@@ -59,8 +60,7 @@ jobs:
         with:
           context: ${{env.MODULE_NAME}}
           file: ${{env.MODULE_NAME}}/Dockerfile.centos7
-          build-args: |
-            goDistributionUrl: https://golang.org/dl/go1.14.2.linux-amd64.tar.gz
+          build-args: ${{env.BUILD_ARGS}}
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
