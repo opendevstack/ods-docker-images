@@ -12,7 +12,7 @@ on:
 
 jobs:
   maven_module:
-    uses: ./.github/actions/publish-two-docker.yml
+    uses: ./.github/workflows/publish-two-docker.yml
     secrets:
       dockeHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerHubToken: ${{ secrets.DOCKERHUB_TOKEN }}
