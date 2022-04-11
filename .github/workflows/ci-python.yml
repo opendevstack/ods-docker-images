@@ -1,0 +1,23 @@
+name: Build Base Image for 'python'
+
+on:
+  pull_request:
+    paths:
+      - "python/**"
+  push:
+    branches:
+      - 'main'
+    paths:
+      - "python/**"
+
+jobs:
+  python_module:
+    uses: ./.github/workflows/publish-two-docker.yml
+    secrets:
+      dockeHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerHubToken: ${{ secrets.DOCKERHUB_TOKEN }}
+    with:
+      module: 'python'
+      imageName: 's2obcn/python-test'
+      buildArgs: ""
+    

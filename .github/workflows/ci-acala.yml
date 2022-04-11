@@ -1,0 +1,25 @@
+name: Build Base Image for 'scala'
+
+on:
+  pull_request:
+    paths:
+      - "scala/**"
+  push:
+    branches:
+      - 'main'
+    paths:
+      - "scala/**"
+
+jobs:
+  scala_module:
+    uses: ./.github/workflows/publish-two-docker.yml
+    secrets:
+      dockeHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
+      dockerHubToken: ${{ secrets.DOCKERHUB_TOKEN }}
+    with:
+      module: 'scala'
+      imageName: 's2obcn/scala-test'
+      buildArgs: |
+        nexusUrl=https://nexus.example.com
+        nexusUsername=developer
+        nexusPassword=s3cr3t
