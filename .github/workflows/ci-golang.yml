@@ -45,6 +45,8 @@ jobs:
         with:
           context: ${{env.MODULE_NAME}}
           file: ${{env.MODULE_NAME}}/Dockerfile.ubi8
+          build-args: |
+            goDistributionUrl: https://golang.org/dl/go1.14.2.linux-amd64.tar.gz
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
@@ -57,6 +59,8 @@ jobs:
         with:
           context: ${{env.MODULE_NAME}}
           file: ${{env.MODULE_NAME}}/Dockerfile.centos7
+          build-args: |
+            goDistributionUrl: https://golang.org/dl/go1.14.2.linux-amd64.tar.gz
           builder: ${{ steps.buildx.outputs.name }}
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }},  ${{env.IMAGE_NAME}}:latest
