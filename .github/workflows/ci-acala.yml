@@ -5,10 +5,9 @@ on:
     paths:
       - "scala/**"
   push:
-    branches:
-      - 'main'
-    paths:
-      - "scala/**"
+    tags:
+      - "v*"
+      - "scala-*"
 
 jobs:
   scala_module:
