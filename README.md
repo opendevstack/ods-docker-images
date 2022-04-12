@@ -18,6 +18,7 @@ Examples:
   - v1.0.0 ==> this will __PUBLISH__ a new Docker image for all modules, with the tags: [v1.0.0, latest]
   - v1.0.0-python.1  ==> this will __PUBLISH__ a new Docker image for __"python"__ module, with the tags: [v1.0.0-python.1, latest]
   
+See https://github.com/opendevstack/ods-docker-images/blob/main/.github/workflows/ci-acala.yml as an example of the CI
 
 # PR Pipeline
-A PR pipeline (check) will only test the modules with files changes (test = build local docker images) 
+A PR pipeline (check) will only test the modules with changed files (test = build local docker images) 
