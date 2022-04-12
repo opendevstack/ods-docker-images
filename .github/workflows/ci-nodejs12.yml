@@ -12,7 +12,7 @@ on:
 
 jobs:
   nodejs12_module:
-    uses: ./.github/workflows/publish-two-docker.yml
+    uses: ./.github/workflows/publish-two-docker-images.yml
     secrets:
       dockeHubUser: ${{ secrets.DOCKERHUB_USERNAME }}
       dockerHubToken: ${{ secrets.DOCKERHUB_TOKEN }}
