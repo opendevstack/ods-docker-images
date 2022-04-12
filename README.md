@@ -19,3 +19,5 @@ Examples:
   - v1.0.0-python.1  ==> this will __PUBLISH__ a new Docker image for __"python"__ module, with the tags: [v0.0.0-python.1, latest]
   
 
+# PR Pipeline
+A PR pipeline (check) will only test the modules with files changes (test = build local docker images) 
