@@ -16,7 +16,7 @@ Once a TAG is pushed, a [GitHub action](https://github.com/opendevstack/ods-dock
 
 Examples:
   - v1.0.0 ==> this will __PUBLISH__ a new Docker image for all modules, with the tags: [v1.0.0, latest]
-  - v1.0.0-python.1  ==> this will __PUBLISH__ a new Docker image for __"python"__ module, with the tags: [v0.0.0-python.1, latest]
+  - v1.0.0-python.1  ==> this will __PUBLISH__ a new Docker image for __"python"__ module, with the tags: [v1.0.0-python.1, latest]
   
 
 # PR Pipeline
