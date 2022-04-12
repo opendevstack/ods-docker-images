@@ -5,10 +5,9 @@ on:
     paths:
       - "terraform/**"
   push:
-    branches:
-      - 'main'
-    paths:
-      - "terraform/**"
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-terraform.*"
 
 jobs:
   terraform_module:

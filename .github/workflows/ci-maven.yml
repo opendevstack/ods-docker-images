@@ -5,10 +5,9 @@ on:
     paths:
       - "maven/**"
   push:
-    branches:
-      - 'main'
-    paths:
-      - "maven/**"
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-maven.*"
 
 jobs:
   maven_module:

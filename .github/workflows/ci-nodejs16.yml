@@ -5,10 +5,9 @@ on:
     paths:
       - "nodejs16/**"
   push:
-    branches:
-      - 'main'
-    paths:
-      - "nodejs16/**"
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-nodejs16.*"
 
 jobs:
   nodejs16_module:
